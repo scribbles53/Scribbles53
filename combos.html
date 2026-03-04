@@ -394,74 +394,56 @@
 .footer-links a:hover::before{
   left:100%;
 }
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR BASE ===== */
 
 .navbar{
-  position:relative;
-  display:flex;
-  justify-content:center;
+  display:grid;
+  grid-template-columns: 1fr 2fr 1fr;
   align-items:center;
   padding:15px 5%;
   background:#3b2f2f;
 }
 
-/* Center container */
-.nav-center{
-  width:100%;
+/* Empty left side for balance */
+.nav-spacer{
+}
+
+/* ===== SEARCH CENTER ===== */
+
+.search-container{
   display:flex;
   justify-content:center;
 }
 
-/* ===== SEARCH BAR ===== */
-
-.search-box{
-  position:relative;
-  width:40%;
-  min-width:250px;
-}
-
-.search-box input{
+.search-container input{
   width:100%;
-  padding:12px 45px 12px 20px;
+  max-width:550px;
+  padding:12px 20px;
   border-radius:30px;
   border:2px solid #c89b3c;
-  outline:none;
-  font-size:.95rem;
   background:#fdfaf4;
-  color:#3b2f2f;
-  transition:.3s ease;
+  font-size:1rem;
+  outline:none;
+  transition:0.3s;
 }
 
-/* Focus effect */
-.search-box input:focus{
-  box-shadow:0 0 12px rgba(200,155,60,.6);
-  border-color:#a67c2e;
+.search-container input:focus{
+  box-shadow:0 0 10px rgba(200,155,60,.6);
 }
 
-/* Search icon */
-.search-box::after{
-  content:"🔍";
-  position:absolute;
-  right:18px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:17px;
-  color:#a67c2e;
-}
-
-/* ===== CART ICON ===== */
+/* ===== CART RIGHT ===== */
 
 .cart-icon{
-  position:absolute;
-  right:5%;
+  justify-self:end;
   font-size:24px;
   cursor:pointer;
   color:white;
+  position:relative;
 }
 
 #cart-count{
   position:absolute;
-  top:-8px;
+  top:-px;
   right:-10px;
   background:#c89b3c;
   color:#3b2f2f;
@@ -470,20 +452,33 @@
   border-radius:50%;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== MOBILE ===== */
 
 @media (max-width:768px){
 
-  .search-box{
-    width:70%;
+  .navbar{
+    grid-template-columns: 1fr auto;
+    gap:10px;
   }
 
-}
+  .nav-spacer{
+    display:none;
+  }
 
-@media (max-width:480px){
+  .search-container{
+    justify-content:flex-start;
+  }
 
-  .search-box{
-    width:90%;
+  .search-container input{
+    width:100%;
+    max-width:250px;  /* smaller search bar */
+    font-size:.85rem;
+    padding:8px 14px;
+  }
+
+  .cart-icon{
+    justify-self:end;
+    font-size:22px;
   }
 
 }
