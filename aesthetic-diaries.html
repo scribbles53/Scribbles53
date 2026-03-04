@@ -410,28 +410,27 @@
 }
 
 /* ===== SEARCH CENTER ===== */
-
-.search-container{
-  display:flex;
-  justify-content:center;
-}
-
 .search-container input{
-  width:100%;
-  max-width:550px;
-  padding:12px 20px;
-  border-radius:30px;
+  padding:10px 22px;
+  border-radius:25px;
   border:2px solid #c89b3c;
   background:#fdfaf4;
-  font-size:1rem;
+  color:#3b2f2f;
+  font-size:14px;
   outline:none;
-  transition:0.3s;
+  transition:0.3s ease;
 }
 
+/* placeholder */
+.search-container input::placeholder{
+  color:#a68c63;
+}
+
+/* focus */
 .search-container input:focus{
-  box-shadow:0 0 10px rgba(200,155,60,.6);
+  border-color:#a67c2e;
+  box-shadow:0 0 8px rgba(200,155,60,0.5);
 }
-
 /* ===== CART RIGHT ===== */
 
 .cart-icon{
