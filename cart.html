@@ -245,10 +245,25 @@ h1{
 
   <div class="summary" id="summaryBox" style="display:none;">
     <div class="total" id="total"></div>
+<div id="customerForm" style="display:none; margin-bottom:15px;">
 
-    <button class="checkout-btn" onclick="checkout()">
-      Proceed to Payment
-    </button>
+<input id="custName" type="text" placeholder="Your Name" 
+style="width:100%;padding:8px;margin-bottom:8px;border-radius:8px;border:1px solid #ccc;">
+
+<input id="custPhone" type="tel" placeholder="Phone Number" 
+style="width:100%;padding:8px;margin-bottom:8px;border-radius:8px;border:1px solid #ccc;">
+
+<textarea id="custAddress" placeholder="Full Address"
+style="width:100%;padding:8px;margin-bottom:8px;border-radius:8px;border:1px solid #ccc;"></textarea>
+
+<button onclick="sendOrder()" class="checkout-btn">
+Submit Order
+</button>
+
+</div>
+    <button class="checkout-btn" onclick="showForm()">
+Proceed to Payment
+</button>
 
     <button onclick="window.location.href='index.html'"
     class="checkout-btn"
@@ -355,18 +370,22 @@ function removeItem(index){
   localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
 }
-function checkout(){
+function showForm(){
+document.getElementById("customerForm").style.display = "block";
+}
 
-let name = prompt("Enter your Name:");
-if(!name) return;
+function sendOrder(){
 
-let phoneCustomer = prompt("Enter your Phone Number:");
-if(!phoneCustomer) return;
+let name = document.getElementById("custName").value;
+let phoneCustomer = document.getElementById("custPhone").value;
+let address = document.getElementById("custAddress").value;
 
-let address = prompt("Enter your Address:");
-if(!address) return;
+if(!name || !phoneCustomer || !address){
+alert("Please fill all details");
+return;
+}
 
-let phone = "919358437253"; // your WhatsApp number
+let phone = "919358437253";
 
 let message = "🛒 *NEW ORDER*\n\n";
 
@@ -380,24 +399,25 @@ let totalAmount = 0;
 
 cart.forEach(item => {
 
-  let subtotal = item.price * item.qty;
-  totalAmount += subtotal;
+let subtotal = item.price * item.qty;
+totalAmount += subtotal;
 
-  message += "• " + item.name + "\n";
-  message += "Qty: " + item.qty + "\n";
-  message += "Price: ₹" + item.price + "\n";
-  message += "Subtotal: ₹" + subtotal + "\n\n";
+message += "• " + item.name + "\n";
+message += "Qty: " + item.qty + "\n";
+message += "Price: ₹" + item.price + "\n";
+message += "Subtotal: ₹" + subtotal + "\n\n";
 
 });
 
 message += "💰 *Total Amount: ₹" + totalAmount + "*";
 
 let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
 window.location.href = url;
 
 localStorage.removeItem("cart");
+
 }
-renderCart();
 </script>
 <script>
 const quotes = [
