@@ -417,13 +417,17 @@ return;
 
 let phone = "919358437253";
 
-let message = "🛒 *NEW ORDER*\n\n";
+let message = "🧾 *HJ-Artstore Order Bill*\n";
+message += "-----------------------------\n\n";
+
+message += "🕒 Order Time: " + orderTime + "\n\n";
 
 message += "👤 Name: " + name + "\n";
 message += "📞 Phone: " + phoneCustomer + "\n";
 message += "📍 Address: " + address + "\n\n";
 
-message += "📦 *Order Details*\n\n";
+message += "📦 *Items Ordered*\n";
+message += "-----------------------------\n";
 
 let totalAmount = 0;
 
@@ -432,14 +436,16 @@ cart.forEach(item => {
 let subtotal = item.price * item.qty;
 totalAmount += subtotal;
 
-message += "• " + item.name + "\n";
-message += "Qty: " + item.qty + "\n";
-message += "Price: ₹" + item.price + "\n";
-message += "Subtotal: ₹" + subtotal + "\n\n";
+message += item.name + "\n";
+message += "Qty: " + item.qty + "  |  ₹" + item.price + "\n";
+message += "Subtotal: ₹" + subtotal + "\n";
+message += "-----------------------------\n";
 
 });
 
-message += "💰 *Total Amount: ₹" + totalAmount + "*";
+message += "\n💰 *Total Amount: ₹" + totalAmount + "*\n";
+message += "-----------------------------\n";
+message += "Thank you for shopping with HJ-Artstore 🎨";
 
 let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
@@ -449,6 +455,10 @@ localStorage.removeItem("cart");
 
 }
 renderCart();
+
+
+localStorage.removeItem("cart");
+location.reload();
 </script>
 <script>
 const quotes = [
